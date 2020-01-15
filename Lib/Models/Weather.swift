@@ -16,11 +16,11 @@ struct WeatherResponse: Decodable {
 
 struct Weather: Decodable {
     
-    let temp: Double?
-    let humidity: Double?
+    let temp: Double
+    let humidity: Double
     
-    static var placeholder: Weather {
-        return Weather(temp: nil, humidity: nil)
+    static var placeholder: Weather? {
+        return nil
     }
     
 }

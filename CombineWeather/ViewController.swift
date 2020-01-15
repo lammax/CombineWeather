@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         
         cancellable = publisher.compactMap {
             ($0.object as! UITextField).text?
-            .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+                .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) // San Antonio -> San%20Antonio
         }
         .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
         .flatMap { city in
