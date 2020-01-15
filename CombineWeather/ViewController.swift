@@ -49,14 +49,16 @@ class ViewController: UIViewController {
             ($0.object as! UITextField).text?
                 .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) // San Antonio -> San%20Antonio
         }
-        .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+        .debounce(for: .seconds(1.0), scheduler: RunLoop.main)
         .flatMap { city in
             self.webservice.fetchWeather(city: city)
-                .catch { _ in Empty() }
+                .catch { _ in Just(Weather.placeholder) }
                 .map { ($0, city) }
         }
         .sink {
-            self.weatherLabel.text = "City = \($0.1)\nTemp = \($0.0?.temp ?? 0.0) ℃\nHumidity = \($0.0?.humidity ?? 0.0) %"
+            let city = "City = \($0.1)"
+            let info: [String] = [city] + ($0.0?.info ?? [])
+            self.weatherLabel.text = info.joined(separator: "\n")
         }
     }
     

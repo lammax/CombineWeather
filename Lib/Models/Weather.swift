@@ -16,11 +16,19 @@ struct WeatherResponse: Decodable {
 
 struct Weather: Decodable {
     
-    let temp: Double
-    let humidity: Double
+    let temp: Double?
+    let humidity: Double?
     
-    static var placeholder: Weather? {
-        return nil
+    static var placeholder: Weather {
+        return Weather(temp: nil, humidity: nil)
+    }
+    
+    var info: [String] {
+        let od2s: (Double?) -> String = { ($0 == nil) ? "" : "\($0!)" }
+        let temp: String = "Temp = \([self.temp].map(od2s)[0]) ℃"
+        let humidity: String = "Humidity = \([self.humidity].map(od2s)[0]) %"
+        
+        return [temp, humidity]
     }
     
 }
