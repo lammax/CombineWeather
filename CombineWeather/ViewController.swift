@@ -22,7 +22,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        showWeather(city: "Tver")
+        //showWeather(city: "Tver")
+        setupPublishers()
     }
     
     private func showWeather(city: String) {
@@ -37,8 +38,26 @@ class ViewController: UIViewController {
                     return "Error in getting weather"
                 }
             }
-        .assign(to: \.text, on: self.weatherLabel)
+            .assign(to: \.text, on: self.weatherLabel)
         
+    }
+    
+    private func setupPublishers() {
+        let publisher = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: self.cityNameTextField)
+        
+        cancellable = publisher.compactMap {
+            ($0.object as! UITextField).text?
+            .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        }
+        .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+        .flatMap { city in
+            self.webservice.fetchWeather(city: city)
+                .catch { _ in Empty() }
+                .map { ($0, city) }
+        }
+        .sink {
+            self.weatherLabel.text = "City = \($0.1)\nTemp = \($0.0?.temp ?? 0.0) ℃\nHumidity = \($0.0?.humidity ?? 0.0) %"
+        }
     }
     
 
