@@ -11,9 +11,11 @@ import Foundation
 struct Constants {
     
     enum City: String, CaseIterable {
-        case tver
-        case abakan
-        case moscow
+        case tver = "Тверь"
+        case abakan = "Абакан"
+        case moscow = "Москва"
+        case sukko = "Сукко"
+        case anapa = "Анапа"
         
         static func list() -> [String] {
             return City.allCases.map { $0.rawValue}
