@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		046BFAFC2482F1E300501F1C /* Date+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BFAFB2482F1E300501F1C /* Date+adds.swift */; };
 		04DFBA5023C47AE100615637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA4F23C47AE100615637 /* AppDelegate.swift */; };
 		04DFBA5223C47AE100615637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA5123C47AE100615637 /* SceneDelegate.swift */; };
 		04DFBA5423C47AE100615637 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA5323C47AE100615637 /* ViewController.swift */; };
@@ -19,7 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04DFBA4C23C47AE100615637 /* XWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		046BFAFB2482F1E300501F1C /* Date+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+adds.swift"; sourceTree = "<group>"; };
+		04DFBA4C23C47AE100615637 /* LWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DFBA4F23C47AE100615637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DFBA5123C47AE100615637 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		04DFBA5323C47AE100615637 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		046BFAFA2482F1D000501F1C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				046BFAFB2482F1E300501F1C /* Date+adds.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		04DFBA4323C47AE100615637 = {
 			isa = PBXGroup;
 			children = (
@@ -55,7 +65,7 @@
 		04DFBA4D23C47AE100615637 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04DFBA4C23C47AE100615637 /* XWeather.app */,
+				04DFBA4C23C47AE100615637 /* LWeather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +87,7 @@
 		04DFBA6323C47B1B00615637 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				046BFAFA2482F1D000501F1C /* Extensions */,
 				04DFBA6A23C4829100615637 /* Utils */,
 				04DFBA6723C4813C00615637 /* Services */,
 				04DFBA6423C47B2300615637 /* Models */,
@@ -125,7 +136,7 @@
 			);
 			name = CombineWeather;
 			productName = CombineWeather;
-			productReference = 04DFBA4C23C47AE100615637 /* XWeather.app */;
+			productReference = 04DFBA4C23C47AE100615637 /* LWeather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -180,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DFBA6623C47B4700615637 /* MainWeather.swift in Sources */,
+				046BFAFC2482F1E300501F1C /* Date+adds.swift in Sources */,
 				04DFBA5423C47AE100615637 /* ViewController.swift in Sources */,
 				04DFBA5023C47AE100615637 /* AppDelegate.swift in Sources */,
 				04DFBA6923C4826D00615637 /* Webservice.swift in Sources */,
@@ -337,7 +349,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.weather;
-				PRODUCT_NAME = XWeather;
+				PRODUCT_NAME = LWeather;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -356,7 +368,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.weather;
-				PRODUCT_NAME = XWeather;
+				PRODUCT_NAME = LWeather;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

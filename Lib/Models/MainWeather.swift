@@ -241,6 +241,6 @@ struct Sys: Decodable {
     let id: Int? //Internal parameter
     let message: Double? //Internal parameter
     let country: String? //Country code (GB, JP etc.)
-    let sunrise: UInt? //Sunrise time, unix, UTC
-    let sunset: UInt? //Sunset time, unix, UTC
+    let sunrise: Double? //Sunrise time, unix, UTC
+    let sunset: Double? //Sunset time, unix, UTC
 }

@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var cityNameTextField: UITextField!
     @IBOutlet weak var weatherIcon: UIImageView!
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var sunsetLabel: UILabel!
     
     private let cityPicker = UIPickerView()
     private var citiesList: [String] = []
@@ -99,6 +101,10 @@ class ViewController: UIViewController {
             .map { $0 }
             .sink { self.weatherIcon.image = $0 }
             
+            //Sunrise & sunset
+            self.sunriseLabel.text = Date.from(unix: $0.0?.sys?.sunrise)
+            self.sunsetLabel.text = Date.from(unix: $0.0?.sys?.sunset)
+
         }
     }
     
