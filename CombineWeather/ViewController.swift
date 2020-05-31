@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     private let webservice = Webservice.sharedInstance
     
-    private var cancellable: AnyCancellable?
+    private var cancellables: [AnyCancellable] = []
     
     private let notificationCenter = NotificationCenter.default
 
@@ -22,12 +22,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var sunsetLabel: UILabel!
+    @IBOutlet weak var fiveDaysForecastButton: UIButton!
     
     private let cityPicker = UIPickerView()
     private var citiesList: [String] = []
     private var currentCity: Constants.City = .tver
     private var waitForWeatherData: String {
         "Waiting for \(currentCity.rawValue) weather..."
+    }
+    private var forecast: ForecastWeather? {
+        willSet {
+            self.fiveDaysForecastButton.isHidden = (newValue?.list?.count ?? 0) < 1
+        }
     }
 
     override func viewDidLoad() {
@@ -46,7 +52,6 @@ class ViewController: UIViewController {
         setupPicker()
         setupPickerToolBar()
 //        cityNameTextField.becomeFirstResponder()
-
     }
     
     private func setupPicker() {
@@ -61,6 +66,8 @@ class ViewController: UIViewController {
         self.weatherLabel.text = waitForWeatherData
         self.cityNameTextField.text = "City: " + (citiesList.first ?? "")
         notificationCenter.post(name: UITextField.textDidEndEditingNotification, object: self.cityNameTextField)
+        
+        self.forecast = nil
     }
     
     private func setupPickerToolBar() {
@@ -90,8 +97,8 @@ class ViewController: UIViewController {
 
     private func showWeather(city: Constants.City) {
         
-        cancellable = self.webservice.fetchWeather(city: city)
-            .catch { _ in Just(WeatherResponse.placeholder) }
+        let cancellable = self.webservice.fetchWeather(city: city, t: CurrentWeather())
+            .catch { _ in Just(CurrentWeather.placeholder) }
         .print()
             .map { weather -> String in
                 if let temp = weather?.main?.temp {
@@ -103,24 +110,27 @@ class ViewController: UIViewController {
             }
             .assign(to: \.text, on: self.weatherLabel)
         
+        self.cancellables.append(cancellable)
+        
     }
     
     private func setupPublishers() {
         let publisher = notificationCenter.publisher(for: UITextField.textDidEndEditingNotification, object: self.cityNameTextField)
         
-        cancellable = publisher.compactMap { obj in
+        let cancellableCurrent = publisher.compactMap { obj in
             (obj.object as! UITextField).text
         }
         .debounce(for: .seconds(1.0), scheduler: RunLoop.main)
         .flatMap { _ in
-            self.webservice.fetchWeather(city: self.currentCity)
-                .catch { error in Just(WeatherResponse.placeholder) }
+            self.webservice.fetchWeather(city: self.currentCity, formFactor: .currentWeather, t: CurrentWeather())
+                .catch { error in Just(CurrentWeather.placeholder) }
                 .map { ($0, self.currentCity)
             }
         }
         .sink {
             //let city = "City = \($0.0?.name ?? $0.1.rawValue)"
-            let info: [String] = ($0.0?.main?.info ?? [])
+            var info: [String] = ($0.0?.main?.info ?? [])
+            info += $0.0?.weather?.first?.info ?? []
             self.weatherLabel.text = info.joined(separator: "\n")
             
             let _ = self.webservice.fetchWeatherIcon(iconID: $0.0?.weather?.first?.icon)
@@ -133,9 +143,30 @@ class ViewController: UIViewController {
             self.sunsetLabel.text = Date.from(unix: $0.0?.sys?.sunset, gmt: $0.0?.timezone)
 
         }
+
+        let cancellableForecast = publisher.compactMap { obj in
+            (obj.object as! UITextField).text
+        }
+        .debounce(for: .seconds(1.0), scheduler: RunLoop.main)
+        .flatMap { _ in
+            self.webservice.fetchWeather(city: self.currentCity, formFactor: .forecast, t: ForecastWeather())
+                .catch { error in Just(ForecastWeather.placeholder) }
+                .map { $0
+            }
+        }
+        .sink {
+            self.forecast = $0
+        }
+
+        self.cancellables.append(cancellableCurrent)
+        self.cancellables.append(cancellableForecast)
     }
     
-
+    @IBAction func button5DaysForecastPress(_ sender: UIButton) {
+        if let forecast = self.forecast {
+            print(forecast.list?.count ?? 0)
+        }
+    }
 
 }
 
@@ -150,6 +181,7 @@ extension ViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.currentCity = Constants.City.item(by: row)
         self.cityNameTextField.text = "City: " + citiesList[row]
+        self.forecast = nil
         self.weatherLabel.text = waitForWeatherData
         notificationCenter.post(name: UITextField.textDidEndEditingNotification, object: self.cityNameTextField)
     }

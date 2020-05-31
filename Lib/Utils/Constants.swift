@@ -35,6 +35,12 @@ struct Constants {
         case us
     }
     
+    enum FormFactor: String {
+        case currentWeather = "weather"
+        case forecast
+        //http://api.openweathermap.org/data/2.5/forecast?q=Abakan&units=metric&lang=ru&appid=b940b7c880132d7727c8f9d105ee530f
+    }
+    
     enum IconType: String {
         case png
         case jpg
@@ -45,25 +51,29 @@ struct Constants {
 
     struct URLs {
         private let weatherAPI: String = "b940b7c880132d7727c8f9d105ee530f"
-        private let baseURL: String = "http://api.openweathermap.org/data/2.5/weather?"
-        private let baseIconURL: String = "http://openweathermap.org/img/wn/"
+        private let baseURL: String = "http://api.openweathermap.org/data/2.5/"
+
         var weather: String = ""
         var icon: String = ""
         
-        init(city: City = .tver, unit: Units = .metric, lang: Lang = .ru) {
+        init(city: City = .tver, formFactor: FormFactor = .currentWeather, unit: Units = .metric, lang: Lang = .ru) {
             weather += baseURL
+            weather += formFactor.rawValue + "?"
             weather += "q=\(city)"
             weather += "&appid=\(weatherAPI)"
             weather += "&units=\(unit.rawValue)"
             weather += "&lang=\(lang.rawValue)"
+            //print(weather)
         }
         
+        private let baseIconURL: String = "http://openweathermap.org/img/wn/"
+
         init(iconID: String, type: IconType = .png) {
             icon += baseIconURL
             icon += iconID
             icon += "@2x."
             icon += type.rawValue
-            print(icon)
+            //print(icon)
         }
         
     }

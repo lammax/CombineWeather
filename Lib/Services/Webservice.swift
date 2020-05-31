@@ -14,13 +14,13 @@ class Webservice {
     
     static let sharedInstance = Webservice()
     
-    func fetchWeather(city: Constants.City) -> AnyPublisher<WeatherResponse?, Error> {
+    func fetchWeather<T: Decodable>(city: Constants.City, formFactor: Constants.FormFactor = .currentWeather, t: T) -> AnyPublisher<T?, Error> {
         
-        guard let url = URL(string: Constants.URLs(city: city).weather) else { fatalError("Invalid weather URL!") }
+        guard let url = URL(string: Constants.URLs(city: city, formFactor: formFactor).weather) else { fatalError("Invalid weather URL!") }
 
         return URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
-            .decode(type: WeatherResponse.self, decoder: JSONDecoder())
+            .decode(type: T.self, decoder: JSONDecoder())
             .map { $0 }
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
