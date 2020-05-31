@@ -26,7 +26,10 @@ class ViewController: UIViewController {
     private let cityPicker = UIPickerView()
     private var citiesList: [String] = []
     private var currentCity: Constants.City = .tver
-    
+    private var waitForWeatherData: String {
+        "Waiting for \(currentCity.rawValue) weather..."
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -40,16 +43,23 @@ class ViewController: UIViewController {
     
     private func setupUI() {
         
+        setupPicker()
+        setupPickerToolBar()
+//        cityNameTextField.becomeFirstResponder()
+
+    }
+    
+    private func setupPicker() {
         cityPicker.delegate = self
         cityPicker.dataSource = self
         cityNameTextField.delegate = self
         cityNameTextField.inputView = cityPicker
-        cityNameTextField.becomeFirstResponder()
     }
     
     private func setupData() {
         citiesList = Constants.City.list()
-        self.cityNameTextField.text = citiesList.first
+        self.weatherLabel.text = waitForWeatherData
+        self.cityNameTextField.text = "City: " + (citiesList.first ?? "")
         notificationCenter.post(name: UITextField.textDidEndEditingNotification, object: self.cityNameTextField)
     }
     
@@ -60,8 +70,24 @@ class ViewController: UIViewController {
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
         toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.cancelPicker))
+
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+
+        cityNameTextField.inputAccessoryView = toolBar
     }
     
+    @objc func donePicker() {
+        cityNameTextField.resignFirstResponder()
+    }
+    @objc func cancelPicker() {
+        cityNameTextField.resignFirstResponder()
+    }
+
     private func showWeather(city: Constants.City) {
         
         cancellable = self.webservice.fetchWeather(city: city)
@@ -69,7 +95,8 @@ class ViewController: UIViewController {
         .print()
             .map { weather -> String in
                 if let temp = weather?.main?.temp {
-                    return "City = \(city)\nTemp = \(temp) ℃\nHumidity = \(weather?.main?.humidity ?? 0.0) %"
+                    //let city ="City = \(city)\n"
+                    return "Temp = \(temp) ℃\nHumidity = \(weather?.main?.humidity ?? 0.0) %"
                 } else {
                     return "Error in getting weather"
                 }
@@ -92,8 +119,8 @@ class ViewController: UIViewController {
             }
         }
         .sink {
-            let city = "City = \($0.0?.name ?? $0.1.rawValue)"
-            let info: [String] = [city] + ($0.0?.main?.info ?? [])
+            //let city = "City = \($0.0?.name ?? $0.1.rawValue)"
+            let info: [String] = ($0.0?.main?.info ?? [])
             self.weatherLabel.text = info.joined(separator: "\n")
             
             let _ = self.webservice.fetchWeatherIcon(iconID: $0.0?.weather?.first?.icon)
@@ -121,11 +148,10 @@ extension ViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.weatherLabel.text = nil
-        self.cityNameTextField.text = citiesList[row]
         self.currentCity = Constants.City.item(by: row)
+        self.cityNameTextField.text = "City: " + citiesList[row]
+        self.weatherLabel.text = waitForWeatherData
         notificationCenter.post(name: UITextField.textDidEndEditingNotification, object: self.cityNameTextField)
-        //cityNameTextField.resignFirstResponder()
     }
     
 }

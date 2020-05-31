@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		046BFAFC2482F1E300501F1C /* Date+adds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BFAFB2482F1E300501F1C /* Date+adds.swift */; };
+		046BFAFE2483C06400501F1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BFAFD2483C06400501F1C /* SceneDelegate.swift */; };
 		04DFBA5023C47AE100615637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA4F23C47AE100615637 /* AppDelegate.swift */; };
-		04DFBA5223C47AE100615637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA5123C47AE100615637 /* SceneDelegate.swift */; };
 		04DFBA5423C47AE100615637 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA5323C47AE100615637 /* ViewController.swift */; };
 		04DFBA5723C47AE100615637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DFBA5523C47AE100615637 /* Main.storyboard */; };
 		04DFBA5923C47AE200615637 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DFBA5823C47AE200615637 /* Assets.xcassets */; };
@@ -21,9 +21,9 @@
 
 /* Begin PBXFileReference section */
 		046BFAFB2482F1E300501F1C /* Date+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+adds.swift"; sourceTree = "<group>"; };
+		046BFAFD2483C06400501F1C /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		04DFBA4C23C47AE100615637 /* LWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DFBA4F23C47AE100615637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04DFBA5123C47AE100615637 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		04DFBA5323C47AE100615637 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		04DFBA5623C47AE100615637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04DFBA5823C47AE200615637 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		04DFBA4E23C47AE100615637 /* CombineWeather */ = {
 			isa = PBXGroup;
 			children = (
+				046BFAFD2483C06400501F1C /* SceneDelegate.swift */,
 				04DFBA4F23C47AE100615637 /* AppDelegate.swift */,
-				04DFBA5123C47AE100615637 /* SceneDelegate.swift */,
 				04DFBA5323C47AE100615637 /* ViewController.swift */,
 				04DFBA5523C47AE100615637 /* Main.storyboard */,
 				04DFBA5823C47AE200615637 /* Assets.xcassets */,
@@ -191,11 +191,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DFBA6623C47B4700615637 /* MainWeather.swift in Sources */,
+				046BFAFE2483C06400501F1C /* SceneDelegate.swift in Sources */,
 				046BFAFC2482F1E300501F1C /* Date+adds.swift in Sources */,
 				04DFBA5423C47AE100615637 /* ViewController.swift in Sources */,
 				04DFBA5023C47AE100615637 /* AppDelegate.swift in Sources */,
 				04DFBA6923C4826D00615637 /* Webservice.swift in Sources */,
-				04DFBA5223C47AE100615637 /* SceneDelegate.swift in Sources */,
 				04DFBA6C23C482A000615637 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,9 +341,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				INFOPLIST_FILE = CombineWeather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -360,9 +361,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				INFOPLIST_FILE = CombineWeather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
