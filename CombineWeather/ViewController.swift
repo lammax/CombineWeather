@@ -102,8 +102,8 @@ class ViewController: UIViewController {
             .sink { self.weatherIcon.image = $0 }
             
             //Sunrise & sunset
-            self.sunriseLabel.text = Date.from(unix: $0.0?.sys?.sunrise)
-            self.sunsetLabel.text = Date.from(unix: $0.0?.sys?.sunset)
+            self.sunriseLabel.text = Date.from(unix: $0.0?.sys?.sunrise, gmt: $0.0?.timezone)
+            self.sunsetLabel.text = Date.from(unix: $0.0?.sys?.sunset, gmt: $0.0?.timezone)
 
         }
     }
