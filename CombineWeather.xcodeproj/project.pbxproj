@@ -12,7 +12,7 @@
 		046BFB082484EEFD00501F1C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046BFB072484EEFD00501F1C /* NotificationCenter.framework */; };
 		046BFB0B2484EEFD00501F1C /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BFB0A2484EEFD00501F1C /* TodayViewController.swift */; };
 		046BFB0E2484EEFD00501F1C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046BFB0C2484EEFD00501F1C /* MainInterface.storyboard */; };
-		046BFB122484EEFD00501F1C /* LWeather.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 046BFB052484EEFC00501F1C /* LWeather.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		046BFB122484EEFD00501F1C /* TodayWeather.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 046BFB052484EEFC00501F1C /* TodayWeather.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		046BFB1B2484F02800501F1C /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BFB1A2484F02800501F1C /* GroupDataManager.swift */; };
 		046BFB1C2484F02800501F1C /* GroupDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BFB1A2484F02800501F1C /* GroupDataManager.swift */; };
 		04DFBA5023C47AE100615637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFBA4F23C47AE100615637 /* AppDelegate.swift */; };
@@ -42,7 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				046BFB122484EEFD00501F1C /* LWeather.appex in Embed App Extensions */,
+				046BFB122484EEFD00501F1C /* TodayWeather.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,7 +52,7 @@
 /* Begin PBXFileReference section */
 		046BFAFB2482F1E300501F1C /* Date+adds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+adds.swift"; sourceTree = "<group>"; };
 		046BFAFD2483C06400501F1C /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		046BFB052484EEFC00501F1C /* LWeather.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LWeather.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		046BFB052484EEFC00501F1C /* TodayWeather.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayWeather.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		046BFB072484EEFD00501F1C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		046BFB0A2484EEFD00501F1C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		046BFB0D2484EEFD00501F1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				04DFBA4C23C47AE100615637 /* LWeather.app */,
-				046BFB052484EEFC00501F1C /* LWeather.appex */,
+				046BFB052484EEFC00501F1C /* TodayWeather.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,7 +230,7 @@
 			);
 			name = TodayWidget;
 			productName = TodayWidget;
-			productReference = 046BFB052484EEFC00501F1C /* LWeather.appex */;
+			productReference = 046BFB052484EEFC00501F1C /* TodayWeather.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		04DFBA4B23C47AE100615637 /* CombineWeather */ = {
@@ -378,7 +378,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				INFOPLIST_FILE = TodayWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -387,8 +387,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.weather;
-				PRODUCT_NAME = LWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.weather.TodayWeather;
+				PRODUCT_NAME = TodayWeather;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -400,7 +400,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				INFOPLIST_FILE = TodayWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -409,8 +409,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.weather;
-				PRODUCT_NAME = LWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lammax.ios.study.weather.TodayWeather;
+				PRODUCT_NAME = TodayWeather;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -538,7 +538,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CombineWeather/LWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				INFOPLIST_FILE = CombineWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -560,7 +560,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CombineWeather/LWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z8JVJD6M2F;
 				INFOPLIST_FILE = CombineWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
