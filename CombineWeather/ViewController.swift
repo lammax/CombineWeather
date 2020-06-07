@@ -128,10 +128,12 @@ class ViewController: UIViewController {
             }
         }
         .sink {
-            //let city = "City = \($0.0?.name ?? $0.1.rawValue)"
+            let city = "City = \($0.0?.name ?? $0.1.rawValue)"
             var info: [String] = ($0.0?.main?.info ?? [])
             info += $0.0?.weather?.first?.info ?? []
             self.weatherLabel.text = info.joined(separator: "\n")
+            
+            GroupDataManager.shared.saveData(value: ([city] + info).joined(separator: "\n"), key: "weatherDataKey")
             
             let _ = self.webservice.fetchWeatherIcon(iconID: $0.0?.weather?.first?.icon)
             .catch { r_ in Just(nil) }

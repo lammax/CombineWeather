@@ -10,6 +10,10 @@ import Foundation
 
 extension Date {
     
+    var unixTimestamp: TimeInterval {
+        return self.timeIntervalSince1970 * 1_000
+    }
+
     static func from(unix time: Double?, gmt shift: Int?) -> String {
         if let unixTime = time, let gmtShift = shift {
             let date = Date(timeIntervalSince1970: unixTime)

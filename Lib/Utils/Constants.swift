@@ -16,7 +16,8 @@ struct Constants {
         case moscow = "Москва"
         case sukko = "Сукко"
         case anapa = "Анапа"
-        
+        case ekaterinburg = "Екатеринбург"
+
         static func list() -> [String] {
             return City.allCases.map { $0.rawValue}
         }
